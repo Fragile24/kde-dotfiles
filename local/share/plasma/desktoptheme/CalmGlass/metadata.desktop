@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Calm Glass
+Comment=Calm dark frosted glass Plasma style with crisp hairline borders and smooth rounded floating bars
+X-KDE-PluginInfo-Name=CalmGlass
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL
+
+[Wallpaper]
+defaultWallpaperTheme=Next
+defaultFileSuffix=.png
+defaultWidth=1920
+defaultHeight=1080
+
+[Settings]
+FallbackTheme=breeze-dark
+
+[ContrastEffect]
+enabled=true
+contrast=0.18
+intensity=1.05
+saturation=1.2

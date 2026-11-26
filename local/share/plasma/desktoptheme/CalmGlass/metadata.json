@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Custom Calm Glass (based on Layan)"
+            }
+        ],
+        "Category": "",
+        "Dependencies": [],
+        "Description": "Calm dark frosted glass Plasma style with crisp hairline borders and smooth rounded floating bars",
+        "EnabledByDefault": true,
+        "Id": "CalmGlass",
+        "License": "GPL 3.0",
+        "Name": "Calm Glass",
+        "Version": "1.0"
+    }
+}
