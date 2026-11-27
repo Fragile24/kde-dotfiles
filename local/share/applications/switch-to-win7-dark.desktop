@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Windows 7 Dark Mode
+Comment=Switch Windows 7 Aero theme to Dark mode
+Exec=/home/fragile/.local/bin/switch-theme win7-dark
+Icon=weather-clear-night
+Categories=Settings;DesktopSettings;
+Terminal=false

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Windows 7 Light Mode
+Comment=Switch Windows 7 Aero theme to Light mode
+Exec=/home/fragile/.local/bin/switch-theme win7-light
+Icon=weather-clear
+Categories=Settings;DesktopSettings;
+Terminal=false

@@ -8,11 +8,14 @@ DROPIN_FILE="$DROPIN_DIR/aerothemeplasma.conf"
 usage() {
     cat <<'HELP'
 Usage: switch-theme <command>
-  win7 [--reset]     Switch to saved Windows 7 Aero theme, SMOD titlebars & taskbar
-  save-win7          Update saved Windows 7 profile from current settings & layout
-  previous           Restore the pre-Windows 7 two-bar Plasma layout & settings
-  apply <theme-id>   Switch to another KDE Global Theme (e.g. com.github.vinceliuice.Layan)
-  list               List installed KDE Global Themes
+  win7 [--reset]        Switch to Windows 7 Aero (Light mode)
+  win7-light [--reset]  Switch to Windows 7 Aero Light mode
+  win7-dark [--reset]   Switch to Windows 7 Aero Dark mode
+  win7-toggle           Toggle between Windows 7 Light and Dark mode
+  save-win7             Update saved Windows 7 layout/config snapshot
+  previous              Restore the pre-Windows 7 two-bar Plasma layout & settings
+  apply <theme-id>      Switch to another KDE Global Theme
+  list                  List installed KDE Global Themes
 HELP
 }
 
@@ -58,49 +61,126 @@ set_kwin_aero_effects() {
     fi
 }
 
-cmd="${1:-}"
-case "$cmd" in
-    win7)
-        reset_layout="${2:-}"
-        mkdir -p "$DROPIN_DIR" "$HOME/.config/Kvantum"
-        cat <<'UNIT' > "$DROPIN_FILE"
+apply_gtk_tone() {
+    local mode="$1" # light or dark
+    local gtk_theme="Breeze"
+    local prefer_dark="false"
+    local portal_scheme="prefer-light"
+    if [ "$mode" = "dark" ]; then
+        gtk_theme="Breeze-Dark"
+        prefer_dark="true"
+        portal_scheme="prefer-dark"
+    fi
+
+    if command -v gsettings >/dev/null 2>&1; then
+        gsettings set org.gnome.desktop.interface color-scheme "$portal_scheme" 2>/dev/null || true
+        gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme" 2>/dev/null || true
+    fi
+
+    for ini in "$HOME/.config/gtk-3.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"; do
+        if [ -f "$ini" ]; then
+            kwriteconfig6 --file "$ini" --group Settings --key gtk-application-prefer-dark-theme "$prefer_dark"
+            kwriteconfig6 --file "$ini" --group Settings --key gtk-theme-name "$gtk_theme"
+        fi
+    done
+
+    if [ -f "$HOME/.gtkrc-2.0" ]; then
+        sed -i -E "s|^gtk-theme-name=.*|gtk-theme-name=\"$gtk_theme\"|" "$HOME/.gtkrc-2.0"
+    fi
+
+    if [ -f "$HOME/.config/xsettingsd/xsettingsd.conf" ]; then
+        sed -i -E "s|^Net/ThemeName .*|Net/ThemeName \"$gtk_theme\"|" "$HOME/.config/xsettingsd/xsettingsd.conf"
+        pkill -HUP xsettingsd 2>/dev/null || true
+    fi
+}
+
+apply_win7() {
+    local mode="$1"      # light or dark
+    local reset_flag="${2:-}"
+    local need_shell_restart=0
+
+    if [ ! -f "$DROPIN_FILE" ]; then
+        need_shell_restart=1
+    fi
+
+    mkdir -p "$DROPIN_DIR" "$HOME/.config/Kvantum"
+    cat <<'UNIT' > "$DROPIN_FILE"
 [Service]
 Environment=PLASMA_DEFAULT_SHELL=io.gitgud.wackyideas.desktop
 Environment=QML_DISABLE_DISTANCEFIELD=1
 Environment=USE_UAC_AGENT=1
 UNIT
-        cp -a "$PROFILE_DIR/win7/kvantum.kvconfig" "$HOME/.config/Kvantum/kvantum.kvconfig"
-        cp -a "$PROFILE_DIR/win7/plasmarc" "$HOME/.config/plasmarc"
-        cp -a "$PROFILE_DIR/win7/kcminputrc" "$HOME/.config/kcminputrc"
-        if [ "$reset_layout" = "--reset" ] || [ ! -f "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc" ]; then
-            cp -a "$PROFILE_DIR/win7/plasma-io.gitgud.wackyideas.desktop-appletsrc" "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc"
-        fi
+
+    cp -a "$PROFILE_DIR/win7/plasmarc" "$HOME/.config/plasmarc"
+    cp -a "$PROFILE_DIR/win7/kcminputrc" "$HOME/.config/kcminputrc"
+    if [ "$reset_flag" = "--reset" ] || [ ! -f "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc" ]; then
+        cp -a "$PROFILE_DIR/win7/plasma-io.gitgud.wackyideas.desktop-appletsrc" "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc"
+        need_shell_restart=1
+    fi
+
+    if [ "$mode" = "dark" ]; then
+        cat <<'KV' > "$HOME/.config/Kvantum/kvantum.kvconfig"
+[General]
+theme=Windows7AeroDark
+KV
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key LookAndFeelPackage Windows7-Aero-Dark-Custom
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key AccentColor 51,153,255
+        plasma-apply-colorscheme AeroDark >/dev/null 2>&1 || kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme AeroDark
+    else
+        cat <<'KV' > "$HOME/.config/Kvantum/kvantum.kvconfig"
+[General]
+theme=Windows7Aero
+KV
         kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key LookAndFeelPackage Windows7-Aero-Custom
-        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle kvantum
-        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme Aero
         kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key AccentColor 0,0,0,0
-        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key accentColorFromWallpaper false
-        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Icons --key Theme "Windows 7 Aero"
-        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Sounds --key Theme "Windows 7"
-        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group WM --key activeFont "Segoe UI,10,-1,5,50,0,0,0,0,0"
+        plasma-apply-colorscheme Aero >/dev/null 2>&1 || kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme Aero
+    fi
 
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key library org.smod.smod
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key theme SMOD
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key ButtonsOnLeft M
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key ButtonsOnRight H_IAX
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key BorderSize Normal
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key BorderSizeAuto true
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Outline --key QmlPath aeroshell/outline/plasma/outline.qml
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBox --key ShowDesktopMode 1
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBox --key LayoutName thumbnail_aero
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBoxAlternative --key ShowDesktopMode 1
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBoxAlternative --key LayoutName flip3d
-        kwriteconfig6 --file "$HOME/.config/kwinrc" --group MouseBindings --key CommandTitlebarWheel Nothing
+    kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle kvantum
+    kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key accentColorFromWallpaper false
+    kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Icons --key Theme "Windows 7 Aero"
+    kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Sounds --key Theme "Windows 7"
+    kwriteconfig6 --file "$HOME/.config/kdeglobals" --group WM --key activeFont "Segoe UI,10,-1,5,50,0,0,0,0,0"
 
-        set_kwin_aero_effects true
+    apply_gtk_tone "$mode"
+
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key library org.smod.smod
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key theme SMOD
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key ButtonsOnLeft M
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key ButtonsOnRight H_IAX
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key BorderSize Normal
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key BorderSizeAuto true
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group Outline --key QmlPath aeroshell/outline/plasma/outline.qml
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBox --key ShowDesktopMode 1
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBox --key LayoutName thumbnail_aero
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBoxAlternative --key ShowDesktopMode 1
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBoxAlternative --key LayoutName flip3d
+    kwriteconfig6 --file "$HOME/.config/kwinrc" --group MouseBindings --key CommandTitlebarWheel Nothing
+
+    set_kwin_aero_effects true
+
+    if [ "$need_shell_restart" -eq 1 ]; then
         systemctl --user daemon-reload
         systemctl --user restart plasma-plasmashell.service
-        echo "Switched to Windows 7 Aero theme."
+    fi
+    echo "Switched to Windows 7 Aero (${mode}) mode."
+}
+
+cmd="${1:-}"
+case "$cmd" in
+    win7|win7-light)
+        apply_win7 light "${2:-}"
+        ;;
+    win7-dark)
+        apply_win7 dark "${2:-}"
+        ;;
+    win7-toggle)
+        current="$(kreadconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme --default Aero)"
+        if [ "$current" = "AeroDark" ]; then
+            apply_win7 light "${2:-}"
+        else
+            apply_win7 dark "${2:-}"
+        fi
         ;;
     save-win7)
         mkdir -p "$PROFILE_DIR/win7"

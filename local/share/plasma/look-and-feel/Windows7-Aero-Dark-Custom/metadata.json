@@ -1,0 +1,24 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "fragile"
+            },
+            {
+                "Name": "AeroThemePlasma"
+            }
+        ],
+        "Category": "",
+        "Description": "Windows 7 Aero Dark theme with custom taskbar layout, pinned apps, SMOD titlebars, and Aero effects",
+        "Icon": "user-desktop",
+        "Id": "Windows7-Aero-Dark-Custom",
+        "License": "GPL-3.0-or-later",
+        "Name": "Windows 7 Aero Dark (Custom)",
+        "Version": "1.0"
+    },
+    "Keywords": "Desktop;Workspace;Appearance;Look and Feel;Windows 7;Aero;Dark;",
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "X-KDE-fallbackPackage": "authui7",
+    "X-Plasma-APIVersion": "2"
+}
