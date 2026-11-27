@@ -6,3 +6,9 @@ Seen=true
 
 [Applications][chromium]
 Seen=true
+
+[Applications][com.shellyorg.shelly]
+Seen=true
+
+[Applications][discord]
+Seen=true

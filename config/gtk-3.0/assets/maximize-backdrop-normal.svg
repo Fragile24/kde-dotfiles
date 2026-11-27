@@ -12,10 +12,64 @@ font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal"
 >
 </g>
 
-<g fill="none" stroke="#787878" stroke-opacity="1" stroke-width="1.01" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="2" transform="matrix(2.5,0,0,2.5,2.5,2.5)"
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
 font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
 >
-<polyline fill="none" vector-effect="none" points="4,11 9,6 14,11 " />
+<image x="0" y="0" width="12" height="6" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="12" y="0" width="26" height="6" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="38" y="0" width="12" height="6" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="0" y="6" width="12" height="36" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="12" y="6" width="26" height="36" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="38" y="6" width="12" height="36" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="0" y="42" width="12" height="8" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="12" y="42" width="26" height="8" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="38" y="42" width="12" height="8" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUCAYAAABxnDbHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIElEQVRIie2VvUrDUBiG3y8JphJEK0iF+jfonCGDgUJvIbkDbylX0GtIpuxCwCVDBkdB0Q4lNBUhCDbwyom2FNHJHhzsM50feJ5zSOAIySsReSX5BGACffRE5IjktrW6KiJ3uooke4uxgT/A2ER1Ymi1/8AmqhVDr/57/mdUSIqOCD+88jU6n06nHQCmjigA89M/X0Zt234ry3IXgNrQQUf5VWcRnfi+/5Km6SGAc5I7JNdyY5Km8imv8quO6qn39HY0Gg1d162qqroMw/DC87ySZHuqX7KV5/lBHMf7URRVRVGcALhuP+54PD52HMcPguA+y7Ju0zR7awi2WJb1PBgMZkmSnNV1fdPv9x+XfxTJUwAugO66givMABQi8qAm75MnbkorazadAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="10" font-weight="400" font-style="normal" 
+>
+<image x="18" y="4" width="13" height="10" preserveAspectRatio="none" image-rendering="optimizeQuality" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAKCAYAAABv7tTEAAABhGlDQ1BHSU1QIGJ1aWx0LWluIHNSR0IAACiRlZE7SANBFEXPbhRFDBFMIWKxiFpp4QexjFEIQoQQIyTRwv2YGMhult0EG0vBVrDw0xi1sLHW1sJWEAQ/IPaClaKNyMokgQQhgq+Zw525j/fugFzO66bbEgLTKjrxSFhJptJK2wsyProYpV/VXXs6FovStD7vkMR5OyJ68b/yG6uuDpIChHTbKYK0AkyuF23Be0BQX1MNkM6AYSeZSoP0IHStyq+CsxWWRc+gk4jPgBwElGwDaw2srzkmyBPAgGFaBsjJKhuCNwSb+ZJem1Ns2LlqLS4IHegjwhzzxFDQKJEjT5ERclgouMSJEG7i7634Y5TQyJNDR2GWAiZqxY/4A35l62bGx6qdOsPQ+ux574PQtgPf2573deR538fge4JLq+4vlGHqA3zbdW3gEAKbcH5V17RduNiCnkdbddSK5APkTAbeTsGfgu4b6Fiq5la75+QeEhsQvYb9AxjKQmC5yd7tjbn9+aaW3w+jvnK6GcLE4AAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAy5pVFh0WE1MOmNvbS5hZG9iZS54bXAAAQBVVEYtOABYTUw6Y29tLmFkb2JlLnhtcABIie1XzW7bOBC++ykE9rKLBUWKki2JsBIUcdIGqHeDxNj2SpEjh4hFaiU6VvJqe9hH6isUlFLH3i26pwI9WCdxfj7O95EzgubnfSPkA7ighLU2Bfr89z8o0KpAH6dLumwu4F6/f27h7vn3lXx+kLlC52eTec/7uqnBiaCvN6bjfYGEsiVw03FvJigYQtxDgT4tb4IL20KQhElI8WWvHxk6mwTzVlX8dnH1AtGqqkD3zjWckN1uF+7i0LZrEuV5TigjjOFWVbh7Mk702HRvPMSIsYBOtrpx2prAr0Vpt65AaBIEwdf66ma53MObLhyqDaWtSS8aEoWU1DU5zOjc5aP7fka3emqA3EJnt62Ey0cw7s0hhJL7/GbbbgY6ShLYQA3GdSQKo6Mt310vb44kWOu6GbL6ujmKdLqqvl2b9wzF/Yv995kMwYNGfGHl1pd3vSiQ358rK7Xiw6uIZwwkjbHI0wwnsUhwFpcMxwlNs2iWgJBwAHVtOieMBA/V102oteIgqzSRWY4VlBFOWE6xmJUKp2xaCcYikZbxAcQfrV5rIzaHVXkopRVPs0SklcywKqsMJzDLcV5SwDSXlJVZzGisBigl+ZVta+EKpGuxBtKY9eDwgvO3N9cFYiF9tdxshKtsWxfogzbb/tWx0jXcOeHVjNI4m9EoZTSmSZ6kr0F/QttpazxmRMM4Gzz+WDwZME74e1qg6CtLftGCcLZdWbspkIcIfObevQQnlHBiIRwUiFE25ZRxGq+ilE+nPMp/oxGnB/FW6erp/6J98wTzUeT3unO2fRpMY0fdwV/jalxu9LgIhqbgQo4UOvEIo8J7l7wXZg2qQOTYrr9xFbIsTZN0OsVMMIGTPEqwiABwOpOzFNQsioQ8Ruls5XaihbdrMK5A73TdDFoFvwwH9etx9O4e/ClQNsWU4b0EjL5IQF4Ik0PGc/IfTcaAgyHjZ9dgu11cnU3mZD8MXzT7wc9pk5Ncp9t16pPTWDkNyNP3JPiZvoyT+f53Cowq0A6dn30BcUmYYjluE5kAAABySURBVCiRY2RgYGAIDk+ZxvCfKZOBGMD4bzqYDg5L+08sAKllYiADsKALhISnY1W4ZuVMTE0fP36EC65dNYsRWQPIScjycE0/fvzA6yRkebim379/o5iMrglZHkNTd0cFVpuwavrz5w9e5yEDsIdJjVwA/KNaIDDw5xYAAAAASUVORK5CYII=" />
 </g>
 
 <g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"

@@ -1,31 +1,33 @@
-# KDE Plasma 6 Dotfiles
+# KDE Plasma 6 Dotfiles & Themes
 
-Personal **KDE Plasma 6 (Wayland)** desktop configuration on **CachyOS**.
+Full backup of my **KDE Plasma 6 (Wayland)** configuration, desktop themes, plasmoids, cursor themes, terminal/shell configs, and smooth font rendering settings on **CachyOS**.
 
-## Highlights
+## What's Backed Up
 
-- **Custom `CalmGlass` Plasma Style** (`local/share/plasma/desktoptheme/CalmGlass/`): deep dark frosted glass (`#12161c`), 1px glass hairline borders, 16px rounded corners, cutout shadows, and muted alpine-blue accents (`#7aafcc`).
-- **Top Bar**: floating adaptive glass bar (`36px`) with application launcher on the left, dead-center `ddd, MMM d` clock in semi-bold `Segoe UI`, Fcitx5 indicator, and a tidy status-focused system tray on the right.
-- **Bottom Dock**: centered Fit-Content floating glass dock (`56px`, single-row) in **Dodge Windows** mode.
-- **Window Decorations**: native **Breeze** decorations (`BorderSize=NoSides`) with **Layan** color scheme, **Tela** icon theme, and **Layan-white-cursors**.
-- **Smooth Font Rendering**: RGB subpixel antialiasing (`rgba=rgb`), `lcddefault` filter, `hintslight`, `embeddedbitmap=false`, and FreeType v40 + stem darkening (`environment.d/90-freetype-smoothing.conf`) synced across Fontconfig, GTK3, GTK4, XSettings, and Xresources.
+### Configs (`config/` & `home/`)
+- **KDE Plasma & KWin**: `kdeglobals`, `kwinrc`, `plasmarc`, `plasmashellrc`, `plasma-org.kde.plasma.desktop-appletsrc`, `plasma-io.gitgud.wackyideas.desktop-appletsrc`, `kglobalshortcutsrc`, `kcminputrc`, `kcmfonts`, `kxkbrc`, `kdedefaults/`, `Kvantum/`, `dolphinrc`, `konsolerc`, `katerc`, `katevirc`, `harunarc`, `arkrc`, `libinput-gestures.conf`, `mimeapps.list`
+- **Smooth Font Rendering & GTK/X11**: `fontconfig/fonts.conf` (`hintnone`, `rgba=rgb`, `lcddefault`, `embeddedbitmap=false`), `environment.d/90-freetype-smoothing.conf`, `gtk-3.0/`, `gtk-4.0/`, `xsettingsd/xsettingsd.conf`, `.Xresources`, `.gtkrc-2.0`
+- **Terminal, Input & Shell**: `kitty/`, `alacritty/`, `fastfetch/`, `fcitx5/`, `fish/config.fish`, `.zshrc`, `.bashrc`, `.bash_profile`
 
-## Structure
+### Themes, Widgets & Cursors (`local/share/` & `icons/`)
+- **Plasma Desktop Themes** (`local/share/plasma/desktoptheme/`): `CalmGlass`, `Layan`, `Monochrome`, `Nordic`, `Nordic-Solid`, `Nordic-bluish`, `Nordic-bluish-solid`, `Nordic-darker`, `Nordic-darker-solid`, `Sweet`, `Sweet-Ambar-Blue`, `Sweet-mars`
+- **Global Look-and-Feel Themes** (`local/share/plasma/look-and-feel/`): `com.github.vinceliuice.Layan`, `Monochrome`, `Nordic`, `Nordic-bluish`, `Sweet`, `Sweet-Ambar-Blue`, `Sweet-Mars`
+- **Plasmoids** (`local/share/plasma/plasmoids/`): `AndromedaLauncher`, `KdeControlStation`
+- **Color Schemes** (`local/share/color-schemes/`): `Layan`, `LayanLight`, `Nordic`, `NordicDarker`, `nordicbluish`, `Sweet`, `Sweet-Mars`, `SweetAmbarBlue`
+- **Aurorae Window Decorations** (`local/share/aurorae/`)
+- **Cursor Themes** (`icons/` -> `~/.icons/`): `Layan-border-cursors`, `Layan-white-cursors`, `Nordic-cursors`, `Sweet-cursors`
 
-```text
-.
-├── config/                  # ~/.config KDE Plasma, KWin, Fontconfig, GTK, XSettings, environment.d
-├── home/                    # ~/.Xresources
-├── local/share/             # Custom CalmGlass Plasma theme & Layan color scheme
-└── install.sh               # Safe restore script (creates a timestamped backup first)
-```
+### Large / System-Installed Packages (Install Separately)
+To keep the repo lightweight and free of private/proprietary binaries, the following are not committed directly:
+- System-installed **AeroThemePlasma** (`Seven-Black` Plasma theme, `Windows7Aero` Kvantum theme, `Windows 7 Aero` icons, `aero-drop` cursors)
+- Upstream icon packs in `~/.local/share/icons/`: `Papirus` / `Papirus-Dark` / `Papirus-Light`, `Tela` / `Tela-dark` / `Tela-light`, `candy-icons`, `Nordic-*`
+- Proprietary Windows `.ttf` fonts (`~/.local/share/fonts/windows/`) and wallpapers (`~/.local/share/wallpapers/`)
+- Private/machine-specific files (`kdeconnect`, SSH configs, `kwinoutputconfig.json`, `kwallet`)
 
 ## Restore / Install
 
 ```bash
-git clone https://github.com/Fragile24/kde-dotfiles.git
-cd kde-dotfiles
+git clone https://github.com/Fragile24/kde-dotfiles.git ~/kde-dotfiles
+cd ~/kde-dotfiles
 ./install.sh
 ```
-
-> **Note:** Private/machine-specific files (`kdeconnect` keys, SSH configs, monitor EDID configs, proprietary fonts, and large wallpaper binaries) are intentionally excluded.

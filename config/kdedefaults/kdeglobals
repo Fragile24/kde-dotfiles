@@ -1,8 +1,8 @@
 [General]
-ColorScheme=Layan
+ColorScheme=Aero
 
 [Icons]
-Theme=Tela
+Theme=Windows 7 Aero
 
 [KDE]
-widgetStyle=Breeze
+widgetStyle=kvantum
