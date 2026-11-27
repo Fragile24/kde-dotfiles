@@ -61,5 +61,3 @@ BorderSize=Normal
 BorderSizeAuto=true
 ButtonsOnLeft=M
 ButtonsOnRight=H_IAX
-library=org.smod.smod
-theme=SMOD

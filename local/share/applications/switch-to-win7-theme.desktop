@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Switch to Windows 7 Theme
+Comment=Apply saved Windows 7 Aero theme, SMOD titlebars, and bottom taskbar
+Exec=/home/fragile/.local/bin/switch-theme win7
+Icon=user-desktop
+Categories=Settings;DesktopSettings;
+Terminal=false

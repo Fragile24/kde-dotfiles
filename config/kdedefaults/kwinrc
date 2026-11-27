@@ -3,5 +3,5 @@ LayoutName=thumbnail_aero
 
 [org.kde.kdecoration2]
 NoPlugin=false
-library=org.smod.smod
-theme=SMOD
+library=org.kde.breeze
+theme=Breeze

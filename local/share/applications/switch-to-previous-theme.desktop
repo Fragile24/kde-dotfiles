@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Switch to Previous Theme
+Comment=Restore previous Plasma two-bar layout and theme settings
+Exec=/home/fragile/.local/bin/switch-theme previous
+Icon=preferences-desktop-theme
+Categories=Settings;DesktopSettings;
+Terminal=false

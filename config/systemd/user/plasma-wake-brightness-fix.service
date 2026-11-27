@@ -1,0 +1,14 @@
+[Unit]
+Description=Restore KDE display dimming and restart PowerDevil after system resume
+PartOf=graphical-session.target
+After=plasma-powerdevil.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /home/fragile/.local/bin/plasma-wake-brightness-fix
+Restart=on-failure
+RestartSec=5
+Slice=background.slice
+
+[Install]
+WantedBy=graphical-session.target

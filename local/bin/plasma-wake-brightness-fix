@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""Reset KWin output dimming and restart PowerDevil after system resume."""
+
+import json
+import logging
+import signal
+import subprocess
+import sys
+
+import gi
+
+gi.require_version("Gio", "2.0")
+gi.require_version("GLibUnix", "2.0")
+from gi.repository import Gio, GLib, GLibUnix
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s",
+)
+log = logging.getLogger("plasma-wake-brightness-fix")
+
+RESUME_SETTLE_DELAY_MS = 2500
+_pending_timer_id = None
+
+
+def restore_brightness():
+    global _pending_timer_id
+    _pending_timer_id = None
+
+    try:
+        res = subprocess.run(
+            ["kscreen-doctor", "-j"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=True,
+        )
+        data = json.loads(res.stdout)
+        outputs = [
+            o["name"]
+            for o in data.get("outputs", [])
+            if o.get("connected") and o.get("enabled") and o.get("name")
+        ]
+        if outputs:
+            args = ["kscreen-doctor"] + [f"output.{name}.dimming.100" for name in outputs]
+            subprocess.run(args, timeout=10, check=True)
+            log.info("Reset dimming to 100%% on outputs: %s", ", ".join(outputs))
+        else:
+            log.info("No enabled connected outputs found; skipping kscreen-doctor dimming reset")
+    except Exception as exc:
+        log.warning("Failed to reset output dimming via kscreen-doctor: %s", exc)
+
+    try:
+        subprocess.run(
+            ["systemctl", "--user", "restart", "plasma-powerdevil.service"],
+            timeout=15,
+            check=True,
+        )
+        log.info("Restarted plasma-powerdevil.service")
+    except Exception as exc:
+        log.warning("Failed to restart plasma-powerdevil.service: %s", exc)
+
+    return GLib.SOURCE_REMOVE
+
+
+def on_prepare_for_sleep(_conn, _sender, _path, _iface, _signal, parameters, _user_data):
+    global _pending_timer_id
+    (going_to_sleep,) = parameters.unpack()
+    if going_to_sleep:
+        if _pending_timer_id is not None:
+            GLib.source_remove(_pending_timer_id)
+            _pending_timer_id = None
+        return
+
+    log.info("Detected resume from sleep; scheduling brightness restore in %dms", RESUME_SETTLE_DELAY_MS)
+    if _pending_timer_id is not None:
+        GLib.source_remove(_pending_timer_id)
+    _pending_timer_id = GLib.timeout_add(RESUME_SETTLE_DELAY_MS, restore_brightness)
+
+
+def main():
+    loop = GLib.MainLoop()
+
+    def quit_loop(*_args):
+        loop.quit()
+        return GLib.SOURCE_REMOVE
+
+    GLibUnix.signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, quit_loop)
+    GLibUnix.signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, quit_loop)
+
+    bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, None)
+    sub_id = bus.signal_subscribe(
+        "org.freedesktop.login1",
+        "org.freedesktop.login1.Manager",
+        "PrepareForSleep",
+        "/org/freedesktop/login1",
+        None,
+        Gio.DBusSignalFlags.NONE,
+        on_prepare_for_sleep,
+        None,
+    )
+    log.info("Listening for login1 PrepareForSleep resume signals")
+    try:
+        loop.run()
+    finally:
+        bus.signal_unsubscribe(sub_id)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

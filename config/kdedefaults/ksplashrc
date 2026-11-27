@@ -1,3 +1,3 @@
 [KSplash]
 Engine=KSplashQML
-Theme=authui7
+Theme=org.kde.breeze.desktop

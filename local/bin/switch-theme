@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROFILE_DIR="$HOME/.config/theme-profiles"
+DROPIN_DIR="$HOME/.config/systemd/user/plasma-plasmashell.service.d"
+DROPIN_FILE="$DROPIN_DIR/aerothemeplasma.conf"
+
+usage() {
+    cat <<'HELP'
+Usage: switch-theme <command>
+  win7 [--reset]     Switch to saved Windows 7 Aero theme, SMOD titlebars & taskbar
+  save-win7          Update saved Windows 7 profile from current settings & layout
+  previous           Restore the pre-Windows 7 two-bar Plasma layout & settings
+  apply <theme-id>   Switch to another KDE Global Theme (e.g. com.github.vinceliuice.Layan)
+  list               List installed KDE Global Themes
+HELP
+}
+
+set_kwin_aero_effects() {
+    local enable="$1"
+    local aero_effects=(aeroglassblur aeroglide fadingpopupsaero squashaero aeroshell-thumbnails libkwin_effect_smodsnap smodpeekeffect)
+    local stock_effects=(blur squash fadingpopups)
+
+    if [ "$enable" = "true" ]; then
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key aeroglassblurEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key blurEnabled false
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key translucencyEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key aeroglideEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key aeroshell-thumbnailsEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key squashaeroEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key squashEnabled false
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key fadingpopupsaeroEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key fadingpopupsEnabled false
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key smodpeekeffectEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key smodpeekscriptEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key libkwin_effect_smodsnapEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key smodglowEnabled false
+        qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
+        for e in "${stock_effects[@]}"; do
+            qdbus6 org.kde.KWin /Effects org.kde.kwin.Effects.unloadEffect "$e" >/dev/null 2>&1 || true
+        done
+        for e in "${aero_effects[@]}"; do
+            qdbus6 org.kde.KWin /Effects org.kde.kwin.Effects.loadEffect "$e" >/dev/null 2>&1 || true
+        done
+    else
+        for e in "${aero_effects[@]}"; do
+            kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key "${e}Enabled" false
+            qdbus6 org.kde.KWin /Effects org.kde.kwin.Effects.unloadEffect "$e" >/dev/null 2>&1 || true
+        done
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key smodpeekscriptEnabled false
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key blurEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key squashEnabled true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Plugins --key fadingpopupsEnabled true
+        qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
+        for e in "${stock_effects[@]}"; do
+            qdbus6 org.kde.KWin /Effects org.kde.kwin.Effects.loadEffect "$e" >/dev/null 2>&1 || true
+        done
+    fi
+}
+
+cmd="${1:-}"
+case "$cmd" in
+    win7)
+        reset_layout="${2:-}"
+        mkdir -p "$DROPIN_DIR" "$HOME/.config/Kvantum"
+        cat <<'UNIT' > "$DROPIN_FILE"
+[Service]
+Environment=PLASMA_DEFAULT_SHELL=io.gitgud.wackyideas.desktop
+Environment=QML_DISABLE_DISTANCEFIELD=1
+Environment=USE_UAC_AGENT=1
+UNIT
+        cp -a "$PROFILE_DIR/win7/kvantum.kvconfig" "$HOME/.config/Kvantum/kvantum.kvconfig"
+        cp -a "$PROFILE_DIR/win7/plasmarc" "$HOME/.config/plasmarc"
+        cp -a "$PROFILE_DIR/win7/kcminputrc" "$HOME/.config/kcminputrc"
+        if [ "$reset_layout" = "--reset" ] || [ ! -f "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc" ]; then
+            cp -a "$PROFILE_DIR/win7/plasma-io.gitgud.wackyideas.desktop-appletsrc" "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc"
+        fi
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key LookAndFeelPackage Windows7-Aero-Custom
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle kvantum
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme Aero
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key AccentColor 0,0,0,0
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key accentColorFromWallpaper false
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Icons --key Theme "Windows 7 Aero"
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Sounds --key Theme "Windows 7"
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group WM --key activeFont "Segoe UI,10,-1,5,50,0,0,0,0,0"
+
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key library org.smod.smod
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key theme SMOD
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key ButtonsOnLeft M
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key ButtonsOnRight H_IAX
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key BorderSize Normal
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group org.kde.kdecoration2 --key BorderSizeAuto true
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group Outline --key QmlPath aeroshell/outline/plasma/outline.qml
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBox --key ShowDesktopMode 1
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBox --key LayoutName thumbnail_aero
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBoxAlternative --key ShowDesktopMode 1
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group TabBoxAlternative --key LayoutName flip3d
+        kwriteconfig6 --file "$HOME/.config/kwinrc" --group MouseBindings --key CommandTitlebarWheel Nothing
+
+        set_kwin_aero_effects true
+        systemctl --user daemon-reload
+        systemctl --user restart plasma-plasmashell.service
+        echo "Switched to Windows 7 Aero theme."
+        ;;
+    save-win7)
+        mkdir -p "$PROFILE_DIR/win7"
+        cp -a "$HOME/.config/kwinrc" "$HOME/.config/kdeglobals" "$HOME/.config/plasmarc" "$HOME/.config/kcminputrc" "$HOME/.config/Kvantum/kvantum.kvconfig" "$HOME/.config/plasma-io.gitgud.wackyideas.desktop-appletsrc" "$PROFILE_DIR/win7/"
+        echo "Saved current Windows 7 Aero config & layout to $PROFILE_DIR/win7"
+        ;;
+    previous)
+        rm -f "$DROPIN_FILE"
+        set_kwin_aero_effects false
+        cp -a "$PROFILE_DIR/previous/plasma-org.kde.plasma.desktop-appletsrc" "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
+        cp -a "$PROFILE_DIR/previous/kwinrc" "$HOME/.config/kwinrc"
+        cp -a "$PROFILE_DIR/previous/kdeglobals" "$HOME/.config/kdeglobals"
+        cp -a "$PROFILE_DIR/previous/plasmarc" "$HOME/.config/plasmarc"
+        qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
+        systemctl --user daemon-reload
+        systemctl --user restart plasma-plasmashell.service
+        echo "Restored previous theme & two-bar layout."
+        ;;
+    apply)
+        theme="${2:?Missing Global Theme ID (run 'switch-theme list')}"
+        rm -f "$DROPIN_FILE"
+        set_kwin_aero_effects false
+        systemctl --user daemon-reload
+        systemctl --user restart plasma-plasmashell.service
+        sleep 2
+        plasma-apply-lookandfeel -a "$theme" --resetLayout
+        echo "Applied Global Theme: $theme"
+        ;;
+    list)
+        plasma-apply-lookandfeel -l
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
+esac
