@@ -118,25 +118,21 @@ UNIT
         need_shell_restart=1
     fi
 
-    if [ "$mode" = "dark" ]; then
-        cat <<'KV' > "$HOME/.config/Kvantum/kvantum.kvconfig"
+    cat <<'KV' > "$HOME/.config/Kvantum/kvantum.kvconfig"
 [General]
-theme=Windows7AeroDark
+theme=Windows7Aero
 KV
+    if [ "$mode" = "dark" ]; then
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle kvantum-dark
         kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key LookAndFeelPackage Windows7-Aero-Dark-Custom
         kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key AccentColor 51,153,255
         plasma-apply-colorscheme AeroDark >/dev/null 2>&1 || kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme AeroDark
     else
-        cat <<'KV' > "$HOME/.config/Kvantum/kvantum.kvconfig"
-[General]
-theme=Windows7Aero
-KV
+        kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle kvantum
         kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key LookAndFeelPackage Windows7-Aero-Custom
         kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key AccentColor 0,0,0,0
         plasma-apply-colorscheme Aero >/dev/null 2>&1 || kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key ColorScheme Aero
     fi
-
-    kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle kvantum
     kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key accentColorFromWallpaper false
     kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Icons --key Theme "Windows 7 Aero"
     kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Sounds --key Theme "Windows 7"

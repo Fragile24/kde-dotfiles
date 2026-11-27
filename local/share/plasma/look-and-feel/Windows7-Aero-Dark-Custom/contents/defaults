@@ -10,7 +10,7 @@ Theme=Windows 7 Aero
 Theme=Windows 7
 
 [kdeglobals][KDE]
-widgetStyle=kvantum
+widgetStyle=kvantum-dark
 
 [kdeglobals][WM]
 activeFont=Segoe UI,10,-1,5,50,0,0,0,0,0
